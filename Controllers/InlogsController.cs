@@ -19,12 +19,6 @@ namespace FakeZuydInlog.Controllers
             _context = context;
         }
 
-
-        public IActionResult Start()
-        {
-            return View();
-        }
-
         // GET: Inlogs
         public async Task<IActionResult> Index()
         {
@@ -34,7 +28,7 @@ namespace FakeZuydInlog.Controllers
         }
 
         // GET: Inlogs/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Inlog == null)
             {
@@ -42,7 +36,7 @@ namespace FakeZuydInlog.Controllers
             }
 
             var inlog = await _context.Inlog
-                .FirstOrDefaultAsync(m => m.Gebruikersnaam == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (inlog == null)
             {
                 return NotFound();
@@ -57,12 +51,17 @@ namespace FakeZuydInlog.Controllers
             return View();
         }
 
+        public IActionResult Start()
+        {
+            return View();
+        }
+
         // POST: Inlogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Gebruikersnaam,Wachtwoord")] Inlog inlog)
+        public async Task<IActionResult> Create([Bind("ID,Gebruikersnaam,Wachtwoord")] Inlog inlog)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +73,7 @@ namespace FakeZuydInlog.Controllers
         }
 
         // GET: Inlogs/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Inlog == null)
             {
@@ -94,9 +93,9 @@ namespace FakeZuydInlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Gebruikersnaam,Wachtwoord")] Inlog inlog)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Gebruikersnaam,Wachtwoord")] Inlog inlog)
         {
-            if (id != inlog.Gebruikersnaam)
+            if (id != inlog.ID)
             {
                 return NotFound();
             }
@@ -110,7 +109,7 @@ namespace FakeZuydInlog.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InlogExists(inlog.Gebruikersnaam))
+                    if (!InlogExists(inlog.ID))
                     {
                         return NotFound();
                     }
@@ -125,7 +124,7 @@ namespace FakeZuydInlog.Controllers
         }
 
         // GET: Inlogs/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Inlog == null)
             {
@@ -133,7 +132,7 @@ namespace FakeZuydInlog.Controllers
             }
 
             var inlog = await _context.Inlog
-                .FirstOrDefaultAsync(m => m.Gebruikersnaam == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (inlog == null)
             {
                 return NotFound();
@@ -145,7 +144,7 @@ namespace FakeZuydInlog.Controllers
         // POST: Inlogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Inlog == null)
             {
@@ -161,9 +160,9 @@ namespace FakeZuydInlog.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InlogExists(string id)
+        private bool InlogExists(int id)
         {
-          return (_context.Inlog?.Any(e => e.Gebruikersnaam == id)).GetValueOrDefault();
+          return (_context.Inlog?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

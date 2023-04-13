@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Gebruikersnaam)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Wachtwoord)
             </th>
             <th></th>
@@ -22,12 +25,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Gebruikersnaam)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Wachtwoord)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Gebruikersnaam">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Gebruikersnaam">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Gebruikersnaam">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }

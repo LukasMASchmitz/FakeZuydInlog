@@ -23,14 +23,21 @@ namespace FakeZuydInlog.Migrations
 
             modelBuilder.Entity("FakeZuydInlog.Models.Inlog", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
                     b.Property<string>("Gebruikersnaam")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Wachtwoord")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Gebruikersnaam");
+                    b.HasKey("ID");
 
                     b.ToTable("Inlog");
                 });
