@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using FakeZuydInlog.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FakeZuydInlogContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FakeZuydInlogContext") ?? throw new InvalidOperationException("Connection string 'FakeZuydInlogContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Inlogs}/{action=Start}/{id?}");
 
 app.Run();
