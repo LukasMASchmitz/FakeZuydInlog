@@ -36,7 +36,7 @@ namespace FakeZuydInlog.Controllers
             }
 
             var inlog = await _context.Inlog
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (inlog == null)
             {
                 return NotFound();
@@ -51,17 +51,12 @@ namespace FakeZuydInlog.Controllers
             return View();
         }
 
-        public IActionResult Start()
-        {
-            return View();
-        }
-
         // POST: Inlogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Gebruikersnaam,Wachtwoord")] Inlog inlog)
+        public async Task<IActionResult> Create([Bind("Id,Gebruikersnaam,Wachtwoord")] Inlog inlog)
         {
             if (ModelState.IsValid)
             {
@@ -93,9 +88,9 @@ namespace FakeZuydInlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Gebruikersnaam,Wachtwoord")] Inlog inlog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Gebruikersnaam,Wachtwoord")] Inlog inlog)
         {
-            if (id != inlog.ID)
+            if (id != inlog.Id)
             {
                 return NotFound();
             }
@@ -109,7 +104,7 @@ namespace FakeZuydInlog.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InlogExists(inlog.ID))
+                    if (!InlogExists(inlog.Id))
                     {
                         return NotFound();
                     }
@@ -132,7 +127,7 @@ namespace FakeZuydInlog.Controllers
             }
 
             var inlog = await _context.Inlog
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (inlog == null)
             {
                 return NotFound();
@@ -162,7 +157,7 @@ namespace FakeZuydInlog.Controllers
 
         private bool InlogExists(int id)
         {
-          return (_context.Inlog?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.Inlog?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
