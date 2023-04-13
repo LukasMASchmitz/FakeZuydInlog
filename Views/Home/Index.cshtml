@@ -12,5 +12,19 @@
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
         }
+
+        transparent-input {
+            background-color: rgba(0,0,0,0) !important;
+            border: none !important;
+           
+        }
+        
     </style>
 }
+
+<body>
+    <input type="email" class="form-control transparent-input" id="floatingInput" placeholder="name@example.com" style="margin-top: 21%; max-width: 28%; margin-left:36%; border: none">
+    <input type="password" class="form-control transparent-input" id="floatingPassword" placeholder="Password" style="max-width: 28%; margin-left:36%; border: none">
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit" style="font-size: 12pt; max-width:9%; margin-left:55%; margin-top:4%">Next</button>
+</body>
