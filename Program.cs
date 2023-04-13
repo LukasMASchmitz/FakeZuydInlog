@@ -27,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Inlogs}/{action=Start}/{id?}");
+    pattern: "{controller=Inlogs}/{action=Create}/{id?}");
 
 app.Run();

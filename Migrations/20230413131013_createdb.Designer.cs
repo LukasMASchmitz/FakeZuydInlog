@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FakeZuydInlog.Migrations
 {
     [DbContext(typeof(FakeZuydInlogContext))]
-    [Migration("20230413095233_inloginfo")]
-    partial class inloginfo
+    [Migration("20230413131013_createdb")]
+    partial class createdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,14 +26,21 @@ namespace FakeZuydInlog.Migrations
 
             modelBuilder.Entity("FakeZuydInlog.Models.Inlog", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Gebruikersnaam")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Wachtwoord")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Gebruikersnaam");
+                    b.HasKey("Id");
 
                     b.ToTable("Inlog");
                 });

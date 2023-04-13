@@ -7,7 +7,7 @@ namespace FakeZuydInlog.Models
     public class Inlog
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Gebruikersnaam { get; set; }  
         public string Wachtwoord { get; set; }
 

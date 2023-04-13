@@ -5,7 +5,7 @@
 namespace FakeZuydInlog.Migrations
 {
     /// <inheritdoc />
-    public partial class inloginfo : Migration
+    public partial class createdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,12 +14,14 @@ namespace FakeZuydInlog.Migrations
                 name: "Inlog",
                 columns: table => new
                 {
-                    Gebruikersnaam = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Gebruikersnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Wachtwoord = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inlog", x => x.Gebruikersnaam);
+                    table.PrimaryKey("PK_Inlog", x => x.Id);
                 });
         }
 
